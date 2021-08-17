@@ -2,12 +2,21 @@ from django.shortcuts import render
 
 
 def main(request):
-    return render(request, 'products/index.html')
+    title = {'title': 'Главная'}
+    context = {}
+    context.update(title)
+    return render(request, 'products/index.html', context=context)
 
 
 def products(request):
-    return render(request, 'products/products.html')
+    title = {'title': 'Продукты'}
+    context = {}
+    context.update(title)
+    return render(request, 'products/products.html', context=context)
 
 
 def contact(request):
-    return render(request, 'products/contact.html')
+    title = {'title': 'Контакты'}
+    context = {}
+    context.update(title)
+    return render(request, 'products/contact.html', context=context)
