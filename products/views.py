@@ -1,4 +1,6 @@
 from django.shortcuts import render
+from products.models import Product, ProductCategory
+import json
 
 
 def main(request):
@@ -11,33 +13,11 @@ def main(request):
 def products(request):
     context = {}
     title = {'title': 'Продукты'}
-    products = [{'Name': 'Отличный стул',
-                 'img': '../../static/img/slider1.jpg',
-                 'price': 2585,
-                 'red': 'Горячее предложение',
-                 'desc': '<p>Расположитесь комфортно.</p><p>Отличное качество материалов позволит вам это.</p> '
-                         '<p>Различные цвета </p>'
-                         '<p>высочайшийуровень эргономики и прочность. </p> '
-                 },
-                {'Name': 'Отличный стул',
-                 'img': '../../static/img/slider1.jpg',
-                 'price': 2585,
-                 'red': 'Горячее предложение',
-                 'desc': '<p>Расположитесь комфортно.</p><p>Отличное качество материалов позволит вам это.</p> '
-                         '<p>Различные цвета </p>'
-                         '<p>высочайшийуровень эргономики и прочность. </p> '
-                 },
-                {'Name': 'Отличный стул',
-                 'img': '../../static/img/slider1.jpg',
-                 'price': 2585,
-                 'red': 'Горячее предложение',
-                 'desc': '<p>Расположитесь комфортно.</p><p>Отличное качество материалов позволит вам это.</p> '
-                         '<p>Различные цвета </p>'
-                         '<p>высочайшийуровень эргономики и прочность. </p> '
-                 }
-                ]
+    products = Product.objects.all()
+    cat = ProductCategory.objects.all()
     context.update(title)
     context['products'] = products
+    context['category'] = cat
     return render(request, 'products.html', context=context)
 
 
