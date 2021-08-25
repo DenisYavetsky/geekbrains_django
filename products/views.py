@@ -1,6 +1,5 @@
 from django.shortcuts import render
 from products.models import Product, ProductCategory
-import json
 
 
 def main(request):
@@ -14,10 +13,10 @@ def products(request):
     context = {}
     title = {'title': 'Продукты'}
     products = Product.objects.all()
-    cat = ProductCategory.objects.all()
+    categories = ProductCategory.objects.all()
     context.update(title)
     context['products'] = products
-    context['category'] = cat
+    context['category'] = categories
     return render(request, 'products.html', context=context)
 
 
