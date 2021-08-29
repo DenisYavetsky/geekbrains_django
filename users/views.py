@@ -1,0 +1,48 @@
+from django.shortcuts import render, HttpResponseRedirect
+from users.forms import ShopUserLoginForm, ShopUserRegisterForm
+from django.contrib import auth
+from django.urls import reverse
+
+
+def login(request):
+    title = 'Авторизация'
+
+    login_form = ShopUserLoginForm(data=request.POST)
+    if request.method == 'POST' and login_form.is_valid():
+        username = request.POST['username']
+        password = request.POST['password']
+
+        user = auth.authenticate(username=username, password=password)
+        if user and user.is_active:
+            auth.login(request, user)
+            return HttpResponseRedirect(reverse('main'))
+
+    content = {'title': title, 'login_form': login_form}
+    return render(request, 'login.html', content)
+
+
+def register(request):
+    title = 'Регистрация'
+    if request.method == 'POST':
+        register_form = ShopUserRegisterForm(request.POST)
+        print(register_form)
+        if register_form.is_valid():
+
+            register_form.save()
+            return HttpResponseRedirect(reverse('login'))
+    else:
+        register_form = ShopUserRegisterForm()
+
+    content = {'title': title, 'register_form': register_form}
+
+    return render(request, 'register.html', content)
+
+
+def logout(request):
+    if request.method == 'POST':
+        pass
+
+    context = {}
+    title = {'title': 'Регистрация'}
+    context.update(title)
+    return render(request, 'login.html', context=context)

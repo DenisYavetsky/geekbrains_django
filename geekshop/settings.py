@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'products.apps.ProductsConfig',
+    'users.apps.UsersConfig',
 ]
 
 MIDDLEWARE = [
@@ -79,7 +80,7 @@ WSGI_APPLICATION = 'geekshop.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3_bkp',
     }
 }
 
@@ -133,3 +134,5 @@ STATICFILES_DIRS = (
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR
+
+AUTH_USER_MODEL = 'users.ShopUser'
