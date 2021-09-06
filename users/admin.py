@@ -1,5 +1,9 @@
 from django.contrib import admin
 
-from users.models import ShopUser
+from users.models import User
+from baskets.admin import BasketAdmin
 
-admin.site.register(ShopUser)
+
+@admin.register(User)
+class UserAdmin(admin.ModelAdmin):
+    inlines = (BasketAdmin,)

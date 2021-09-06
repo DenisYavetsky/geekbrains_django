@@ -10,11 +10,12 @@ class ProductCategory(models.Model):
 
 
 class Product(models.Model):
-    name = models.CharField(max_length=100)
-    desc = models.TextField(max_length=1000)
-    img = models.ImageField(upload_to='media')
-    price = models.IntegerField(default=0)
+    name = models.CharField(max_length=256)
+    image = models.ImageField(upload_to='products_images', blank=True, null=True)
+    description = models.CharField(max_length=64, blank=True, null=True)
+    price = models.DecimalField(max_digits=8, decimal_places=2, default=0)
+    quantity = models.PositiveIntegerField(default=0)
     category = models.ForeignKey(ProductCategory, on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.name
+        return f'{self.name} | {self.category.name}'
